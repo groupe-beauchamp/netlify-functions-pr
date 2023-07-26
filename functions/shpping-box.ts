@@ -10,7 +10,7 @@ export const handler: Handler = async (event, context) => {
     if (!event.body) {
         return {
             statusCode: 400,
-            body: JSON.stringify({ err: "no body :( " }),
+            body: JSON.stringify({ err: "No body :( " }),
         };
     }
     const product = JSON.parse(event.body);
