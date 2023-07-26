@@ -152,10 +152,12 @@ export const handler: Handler = async (event, context) => {
     const mutationData = mutationResponse;
 
     console.log("Mutation response: ", mutationResponse);
+    console.log("Mutation metafields:", mutationResponse.data.metafieldsSet.metafields);
+    console.log("Mutation errors:", mutationResponse.data.metafieldsSet.userErrors);
     // Not sure this data is always there so...
-    if (typeof mutationResponse.data.metafieldsSet !== "undefined" && typeof mutationResponse.data.metafieldsSet.userErrors !== "undefined") {
-        console.log("Mutation errors:", mutationResponse.data.metafieldsSet.userErrors);
-    }
+    // if (typeof mutationResponse.data.metafieldsSet !== "undefined" && typeof mutationResponse.data.metafieldsSet.userErrors !== "undefined") {
+    //
+    // }
 
 
     return {
