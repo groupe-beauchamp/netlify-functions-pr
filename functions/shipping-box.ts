@@ -139,7 +139,8 @@ export const handler: Handler = async (event, context) => {
 
     const mutationData = mutationResponse;
 
-    console.log("Mutation response: ", mutationData)
+    console.log("Mutation response: ", mutationResponse);
+    console.log("Mutation errors:", mutationResponse.data.metafieldsSet.userErrors);
 
     return {
         statusCode: 200,
