@@ -14,7 +14,7 @@ export const handler: Handler = async (event, context) => {
         };
     }
     const product = JSON.parse(event.body);
-    console.log(JSON.stringify({product}))
+    console.log(JSON.stringify({product}));
     const queryBody = `
   query {
     product(id: "${product.admin_graphql_api_id}") {
@@ -53,6 +53,7 @@ export const handler: Handler = async (event, context) => {
         JSON.stringify({ query: queryBody })
     );
 
+    console.log("Shopify data: ", shopifyData);
 
     const productData = shopifyData.data.product
     const productTags = getProductTags(productData);
