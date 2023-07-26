@@ -108,19 +108,22 @@ export const handler: Handler = async (event, context) => {
             ownerId: variantAdminGraphQLId,
             namespace: "custom",
             key: `package_width`,
-            value: `${boxWidth}`
+            value: `${boxWidth}`,
+            type: "number_integer"
         },
         {
             ownerId: variantAdminGraphQLId,
             namespace: "custom",
             key: `package_length`,
-            value: `${boxDepth}`
+            value: `${boxDepth}`,
+            type: "number_integer"
         },
         {
             ownerId: variantAdminGraphQLId,
             namespace: "custom",
             key: `package_height`,
-            value: `${boxHeight}`
+            value: `${boxHeight}`,
+            type: "number_integer"
         }]
 
 
@@ -140,7 +143,7 @@ export const handler: Handler = async (event, context) => {
     const mutationData = mutationResponse;
 
     console.log("Mutation response: ", mutationResponse);
-    console.log("Mutation errors:", mutationResponse.data.metafieldsSet.userErrors);
+    // console.log("Mutation errors:", mutationResponse.data.metafieldsSet.userErrors);
 
     return {
         statusCode: 200,
