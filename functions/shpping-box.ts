@@ -6,7 +6,7 @@ export const handler: Handler = async (event, context) => {
     const SHOPIFY_ACCESS_TOKEN = process.env.BEAUCHAMP_SHOPIFY_ACCESS_TOKEN;
 
     const shopifyGraphEndpoint =
-        "https://galeriebeauchamp.myshopify.com/admin/api/2023-04/graphql.json";
+        "https://galeriebeauchamp.myshopify.com/admin/api/2023-07/graphql.json";
     if (!event.body) {
         return {
             statusCode: 400,
