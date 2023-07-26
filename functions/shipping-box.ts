@@ -66,6 +66,15 @@ export const handler: Handler = async (event, context) => {
         boxSizes,
     });
 
+    console.log({
+        productHeight : productHeight,
+        productWidth : productWidth,
+        productTags : productTags,
+        boxDepth : boxDepth,
+        boxHeight : boxHeight,
+        boxWidth : boxWidth
+    });
+
     if (!boxDepth) {
         return {
             statusCode: 400,
@@ -143,6 +152,7 @@ export const handler: Handler = async (event, context) => {
     const mutationData = mutationResponse;
 
     console.log("Mutation response: ", mutationResponse);
+    // Not sure this data is always there so...
     if (typeof mutationResponse.data.metafieldsSet !== "undefined" && typeof mutationResponse.data.metafieldsSet.userErrors !== "undefined") {
         console.log("Mutation errors:", mutationResponse.data.metafieldsSet.userErrors);
     }
