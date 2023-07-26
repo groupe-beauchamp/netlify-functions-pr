@@ -4,6 +4,7 @@ import { Type } from "typescript";
 
 export const handler: Handler = async (event, context) => {
     const SHOPIFY_ACCESS_TOKEN = process.env.BEAUCHAMP_SHOPIFY_ACCESS_TOKEN;
+    const VERSION = '1.0.0';
 
     const shopifyGraphEndpoint =
         "https://galeriebeauchamp.myshopify.com/admin/api/2023-07/graphql.json";
