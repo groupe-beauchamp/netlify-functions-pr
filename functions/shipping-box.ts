@@ -1,6 +1,6 @@
-import { Handler } from "@netlify/functions";
+import {Handler} from "@netlify/functions";
 import * as https from "https";
-import { Type } from "typescript";
+import {Type} from "typescript";
 
 export const handler: Handler = async (event, context) => {
     const SHOPIFY_ACCESS_TOKEN = process.env.BEAUCHAMP_SHOPIFY_ACCESS_TOKEN;
@@ -11,7 +11,7 @@ export const handler: Handler = async (event, context) => {
     if (!event.body) {
         return {
             statusCode: 400,
-            body: JSON.stringify({ err: "No body :( " }),
+            body: JSON.stringify({err: "No body :( "}),
         };
     }
     const product = JSON.parse(event.body);
@@ -51,15 +51,15 @@ export const handler: Handler = async (event, context) => {
             "Content-Type": "application/json",
             "X-Shopify-Access-Token": SHOPIFY_ACCESS_TOKEN, // Replace with your actual access token
         },
-        JSON.stringify({ query: queryBody })
+        JSON.stringify({query: queryBody})
     );
 
     console.log("Shopify data: ", shopifyData);
 
     const productData = shopifyData.data.product
     const productTags = getProductTags(productData);
-    const { productHeight, productWidth } = getProductDimensions(productData);
-    const { boxDepth, boxHeight, boxWidth } = findBestBox({
+    const {productHeight, productWidth} = getProductDimensions(productData);
+    const {boxDepth, boxHeight, boxWidth} = findBestBox({
         productHeight,
         productWidth,
         productTags,
@@ -103,26 +103,24 @@ export const handler: Handler = async (event, context) => {
 
     const variantAdminGraphQLId = product.variants[0].admin_graphql_api_id
 
-    const metafields = [{
-        ownerId: variantAdminGraphQLId,
-        namespace: "custom",
-        key: `package_width`,
-        value: `${boxWidth}`,
-        type: "float"
-    },
+    const metafields = [
+        {
+            ownerId: variantAdminGraphQLId,
+            namespace: "custom",
+            key: `package_width`,
+            value: `${boxWidth}`
+        },
         {
             ownerId: variantAdminGraphQLId,
             namespace: "custom",
             key: `package_length`,
-            value: `${boxDepth}`,
-            type: "float"
+            value: `${boxDepth}`
         },
         {
             ownerId: variantAdminGraphQLId,
             namespace: "custom",
             key: `package_height`,
-            value: `${boxHeight}`,
-            type: "float"
+            value: `${boxHeight}`
         }]
 
 
@@ -135,11 +133,13 @@ export const handler: Handler = async (event, context) => {
         },
         JSON.stringify({
             query: mutationBody,
-            variables: { metafields },
+            variables: {metafields},
         })
     );
 
     const mutationData = mutationResponse;
+
+    console.log("Mutation response: ", mutationData)
 
     return {
         statusCode: 200,
@@ -165,33 +165,33 @@ export const handler: Handler = async (event, context) => {
 //
 
 const boxSizes = [
-    { width: 10, height: 20, packageWidth: 38, packageHeight: 64 },
-    { width: 12, height: 24, packageWidth: 43, packageHeight: 74 },
-    { width: 12, height: 36, packageWidth: 43, packageHeight: 104 },
-    { width: 12, height: 48, packageWidth: 43, packageHeight: 135 },
-    { width: 12, height: 60, packageWidth: 43, packageHeight: 165 },
-    { width: 16, height: 20, packageWidth: 53, packageHeight: 64 },
-    { width: 18, height: 36, packageWidth: 58, packageHeight: 104 },
-    { width: 20, height: 24, packageWidth: 64, packageHeight: 74 },
-    { width: 24, height: 24, packageWidth: 74, packageHeight: 74 },
-    { width: 24, height: 30, packageWidth: 74, packageHeight: 89 },
-    { width: 24, height: 36, packageWidth: 74, packageHeight: 104 },
-    { width: 24, height: 48, packageWidth: 74, packageHeight: 135 },
-    { width: 30, height: 30, packageWidth: 89, packageHeight: 89 },
-    { width: 30, height: 36, packageWidth: 89, packageHeight: 104 },
-    { width: 30, height: 40, packageWidth: 89, packageHeight: 114 },
-    { width: 30, height: 60, packageWidth: 89, packageHeight: 165 },
-    { width: 36, height: 36, packageWidth: 104, packageHeight: 104 },
-    { width: 36, height: 48, packageWidth: 104, packageHeight: 135 },
-    { width: 40, height: 40, packageWidth: 114, packageHeight: 114 },
-    { width: 40, height: 60, packageWidth: 114, packageHeight: 165 },
-    { width: 48, height: 48, packageWidth: 135, packageHeight: 135 },
-    { width: 48, height: 60, packageWidth: 135, packageHeight: 165 },
-    { width: 48, height: 72, packageWidth: 135, packageHeight: 196 },
-    { width: 60, height: 60, packageWidth: 165, packageHeight: 165 },
-    { width: 60, height: 72, packageWidth: 165, packageHeight: 196 },
-    { width: 60, height: 84, packageWidth: 165, packageHeight: 226 },
-    { width: 60, height: 96, packageWidth: 165, packageHeight: 257 },
+    {width: 10, height: 20, packageWidth: 38, packageHeight: 64},
+    {width: 12, height: 24, packageWidth: 43, packageHeight: 74},
+    {width: 12, height: 36, packageWidth: 43, packageHeight: 104},
+    {width: 12, height: 48, packageWidth: 43, packageHeight: 135},
+    {width: 12, height: 60, packageWidth: 43, packageHeight: 165},
+    {width: 16, height: 20, packageWidth: 53, packageHeight: 64},
+    {width: 18, height: 36, packageWidth: 58, packageHeight: 104},
+    {width: 20, height: 24, packageWidth: 64, packageHeight: 74},
+    {width: 24, height: 24, packageWidth: 74, packageHeight: 74},
+    {width: 24, height: 30, packageWidth: 74, packageHeight: 89},
+    {width: 24, height: 36, packageWidth: 74, packageHeight: 104},
+    {width: 24, height: 48, packageWidth: 74, packageHeight: 135},
+    {width: 30, height: 30, packageWidth: 89, packageHeight: 89},
+    {width: 30, height: 36, packageWidth: 89, packageHeight: 104},
+    {width: 30, height: 40, packageWidth: 89, packageHeight: 114},
+    {width: 30, height: 60, packageWidth: 89, packageHeight: 165},
+    {width: 36, height: 36, packageWidth: 104, packageHeight: 104},
+    {width: 36, height: 48, packageWidth: 104, packageHeight: 135},
+    {width: 40, height: 40, packageWidth: 114, packageHeight: 114},
+    {width: 40, height: 60, packageWidth: 114, packageHeight: 165},
+    {width: 48, height: 48, packageWidth: 135, packageHeight: 135},
+    {width: 48, height: 60, packageWidth: 135, packageHeight: 165},
+    {width: 48, height: 72, packageWidth: 135, packageHeight: 196},
+    {width: 60, height: 60, packageWidth: 165, packageHeight: 165},
+    {width: 60, height: 72, packageWidth: 165, packageHeight: 196},
+    {width: 60, height: 84, packageWidth: 165, packageHeight: 226},
+    {width: 60, height: 96, packageWidth: 165, packageHeight: 257},
 ];
 
 //
@@ -217,7 +217,7 @@ function getProductDimensions(product) {
         });
     }
 
-    return { productWidth, productHeight };
+    return {productWidth, productHeight};
 }
 
 function getProductTags(productJson) {
@@ -291,16 +291,16 @@ function getBoxType(tags) {
         hasNoBoxDefinition = true;
     }
 
-    return { isSimpleBox, isDoubleBox, isSpecialBox, hasNoBoxDefinition };
+    return {isSimpleBox, isDoubleBox, isSpecialBox, hasNoBoxDefinition};
 }
 
-function findBestBox({ productTags, productWidth, productHeight, boxSizes }) {
-    const { isSimpleBox, isDoubleBox, isSpecialBox, hasNoBoxDefinition } =
+function findBestBox({productTags, productWidth, productHeight, boxSizes}) {
+    const {isSimpleBox, isDoubleBox, isSpecialBox, hasNoBoxDefinition} =
         getBoxType(productTags);
 
     // we don't want to return anything if it has no box definition
     if (hasNoBoxDefinition) {
-        return { boxWidth: null, boxHeight: null, boxDepth: null };
+        return {boxWidth: null, boxHeight: null, boxDepth: null};
     }
 
     let boxWidth: any = null;
